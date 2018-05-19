@@ -1,0 +1,33 @@
+# Project: touchphone
+# Makefile created by Dev-C++ 5.11
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+RES      = touchphone_private.res
+OBJ      = touchphone.o $(RES)
+LINKOBJ  = touchphone.o $(RES)
+LIBS     = -L"F:/Software/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib32" -L"F:/Software/Dev-Cpp/MinGW64/lib" -lgraphics -lgdi32 -limm32 -lmsimg32 -lole32 -loleaut32 -lwinmm -luuid -mwindows -lgraphics -lgdi32 -limm32 -lmsimg32 -lole32 -loleaut32 -lwinmm -luuid -m32
+INCS     = -I"F:/Software/Dev-Cpp/MinGW64/include" -I"F:/Software/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"F:/Software/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
+CXXINCS  = -I"F:/Software/Dev-Cpp/MinGW64/include" -I"F:/Software/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"F:/Software/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"F:/Software/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
+BIN      = touchphone.exe
+CXXFLAGS = $(CXXINCS) -m32
+CFLAGS   = $(INCS) -m32
+RM       = rm.exe -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+touchphone.o: touchphone.cpp
+	$(CPP) -c touchphone.cpp -o touchphone.o $(CXXFLAGS)
+
+touchphone_private.res: touchphone_private.rc 
+	$(WINDRES) -i touchphone_private.rc -F pe-i386 --input-format=rc -o touchphone_private.res -O coff 
+
